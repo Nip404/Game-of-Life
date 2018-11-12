@@ -11,3 +11,5 @@ In Custom mode:
   - LEFT click to place individual cells
   - RIGHT click and hold to draw multiple cells
   - Press ENTER to start
+
+Change the "_\_overlap_" variable in the "engine" module to toggle neighbour checking between opposite walls.
