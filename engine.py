@@ -48,12 +48,10 @@ class Board:
             self.draw()
 
             pygame.display.flip()
-
+            
     def neighbours(self, pos):
-        return sum(self.board[neighbour[1]][neighbour[0]] for neighbour in [[pos[0]-1, pos[1]-1], [pos[0], pos[1]-1], [pos[0]+1, pos[1]-1], [pos[0]-1, pos[1]], [pos[0]+1, pos[1]], [pos[0]-1, pos[1]+1], [pos[0], pos[1]+1], [pos[0]+1, pos[1]+1]] if all(i >= 0 and p[q] < [len(self.board[0]), len(self.board)][q] for q, i in enumerate(p))])\ 
-            if not _overlap else sum(self.board[neighbour[1]][neighbour[0]] for neighbour in [[p[0] if p[0] < len(self.board[0]) else\
-            p[0]-len(self.board[0]), p[1 ] if p[1] < len(self.board) else p[1]-len(self.board)] for p in [[pos[0]-1, pos[1]-1], [pos[0], pos[1]-1], [pos[0]+1, pos[1]-1], [pos[0]-1, pos[1]], [pos[0]+1, pos[1]], [pos[0]-1, pos[1]+1], [pos[0], pos[1]+1], [pos[0]+1, pos[1]+1]]])
-
+        return sum(self.board[neighbour[1]][neighbour[0]] for neighbour in [p for p in [[pos[0]-1, pos[1]-1], [pos[0], pos[1]-1], [pos[0]+1, pos[1]-1], [pos[0]-1, pos[1]], [pos[0]+1, pos[1]], [pos[0]-1, pos[1]+1], [pos[0], pos[1]+1], [pos[0]+1, pos[1]+1]] if all(i >= 0 and p[q] < [len(self.board[0]), len(self.board)][q] for q, i in enumerate(p))]) if not _overlap else sum(self.board[neighbour[1]][neighbour[0]] for neighbour in [[p[0] if p[0] < len(self.board[0]) else p[0]-len(self.board[0]), p[1] if p[1] < len(self.board) else p[1]-len(self.board)] for p in [[pos[0]-1, pos[1]-1], [pos[0], pos[1]-1], [pos[0]+1, pos[1]-1], [pos[0]-1, pos[1]], [pos[0]+1, pos[1]], [pos[0]-1, pos[1]+1], [pos[0], pos[1]+1], [pos[0]+1, pos[1]+1]]])
+    
     def advance(self):
         self.board = [[1 if ((self.board[y][x] and self.neighbours([x, y]) in [2, 3]) or (not self.board[y][x] and self.neighbours([x, y]) == 3)) else 0 for x in range(len(self.board[0]))] for y in range(len(self.board))]
 
